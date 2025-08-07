@@ -1,7 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { HttpStatus } from '@nestjs/common';
 
 import { RegistrationService } from './registration.service';
-import { HttpStatus } from '@nestjs/common';
+import { RegistrationRepository } from './repositories/registration.repository';
+import { Student } from './entities/student.entity';
 
 describe('RegistrationService', () => {
   let regService: RegistrationService;
@@ -21,6 +23,17 @@ describe('RegistrationService', () => {
             })),
           },
         },
+        {
+          provide: RegistrationRepository,
+          useValue: {
+            getStudentById: jest.fn().mockResolvedValue({
+              id: '5543231',
+              name: 'Juan dela Cruz',
+              course: 'BCS',
+              dob: '1990-10-01',
+            } as Student),
+          },
+        },
       ],
     }).compile();
 
@@ -30,11 +43,7 @@ describe('RegistrationService', () => {
   describe('root', () => {
     it('should send a message', async () => {
       try {
-        const result = await regService.sendMessage({
-          studentId: '0953294',
-          name: 'Alven',
-          courseCode: 'BCS',
-        });
+        const result = await regService.sendMessage('5543231');
 
         expect(result).toBe('ok');
       } catch (error) {

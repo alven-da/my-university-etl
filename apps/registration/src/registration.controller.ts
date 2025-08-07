@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { RegistrationService } from '@registration/registration.service';
 import { RegistrationInputDto } from '@registration/dtos/registration.dto';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Registration')
 @Controller()
@@ -16,9 +16,8 @@ export class RegistrationController {
   }
 
   @ApiOperation({ summary: 'Send data to consumer' })
-  @ApiBody({ type: RegistrationInputDto })
-  @Post('/messages/send')
-  async sendMessage(@Body() body: RegistrationInputDto): Promise<string> {
-    return this.appService.sendMessage(body);
+  @Post('/messages/send/:studentId')
+  async sendMessage(@Param('studentId') studentId: string): Promise<string> {
+    return this.appService.sendMessage(studentId);
   }
 }

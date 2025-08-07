@@ -78,7 +78,8 @@
       "<rootDir>/apps/"
     ],
     "moduleNameMapper": {
-      "^@registration(|/.*)$": "<rootDir>/apps/registration/src/$1"
+      "^@registration(|/.*)$": "<rootDir>/apps/registration/src/$1",
+      "^@curriculum(|/.*)$": "<rootDir>/apps/curriculum/src/$1"
     }
   }
 }
