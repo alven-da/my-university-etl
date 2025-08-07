@@ -1,10 +1,20 @@
 import { Module } from '@nestjs/common';
-import { CurriculumController } from './curriculum.controller';
-import { CurriculumService } from './curriculum.service';
+import { ConfigModule } from '@nestjs/config';
+
+import { RabbitMQClientModule } from '@curriculum/common/rabbit-mq-consumer.module';
+import { CurriculumController } from '@curriculum/curriculum.controller';
+import { CurriculumService } from '@curriculum/curriculum.service';
+import { CurriculumRepository } from './repositories/curriculum.repository';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), RabbitMQClientModule],
   controllers: [CurriculumController],
-  providers: [CurriculumService],
+  providers: [
+    CurriculumService,
+    {
+      provide: CurriculumRepository,
+      useValue: {},
+    },
+  ],
 })
 export class CurriculumModule {}

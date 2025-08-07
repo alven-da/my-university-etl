@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(RegistrationModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Receipt Extractor Service')
+    .setTitle('Registration Service')
     .setVersion('1.0')
     .build();
 
@@ -14,7 +14,7 @@ async function bootstrap() {
 
   SwaggerModule.setup('docs', app, document);
 
-  await app.listen(process.env.REGISTRATION_PORT ?? 3000);
+  await app.listen(process.env.REGISTRATION_PORT ?? 3500);
 }
 
 bootstrap();

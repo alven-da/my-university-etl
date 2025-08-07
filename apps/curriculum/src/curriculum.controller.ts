@@ -6,7 +6,7 @@ export class CurriculumController {
   constructor(private readonly curriculumService: CurriculumService) {}
 
   @Get()
-  getHello(): string {
-    return this.curriculumService.getHello();
+  healthCheck(): string {
+    return 'This is Curriculum Service';
   }
 }

@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { RegistrationController } from './registration.controller';
 import { RegistrationService } from './registration.service';
+import { RegistrationRepository } from './repositories/registration.repository';
 
 describe('RegistrationController', () => {
   let controller: RegistrationController;
@@ -23,6 +24,10 @@ describe('RegistrationController', () => {
             })),
           },
         },
+        {
+          provide: RegistrationRepository,
+          useValue: {},
+        },
       ],
     }).compile();
 
@@ -42,11 +47,7 @@ describe('RegistrationController', () => {
     it('should send a message to a message queue', async () => {
       jest.spyOn(service, 'sendMessage').mockResolvedValue('ok');
 
-      const result = await controller.sendMessage({
-        studentId: '093453239',
-        name: 'Juan dela Cruz',
-        courseCode: 'BCS',
-      });
+      const result = await controller.sendMessage('093453239');
 
       expect(result).toBe('ok');
     });
