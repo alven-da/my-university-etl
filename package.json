@@ -75,11 +75,13 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/apps/"
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@registration(|/.*)$": "<rootDir>/apps/registration/src/$1",
-      "^@curriculum(|/.*)$": "<rootDir>/apps/curriculum/src/$1"
+      "^@common/common(|/.*)$": "<rootDir>/libs/common/src/$1",
+      "^@curriculum(|/.*)$": "<rootDir>/apps/curriculum/src/$1",
+      "^@registration(|/.*)$": "<rootDir>/apps/registration/src/$1"
     }
   }
 }

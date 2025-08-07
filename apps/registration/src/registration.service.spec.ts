@@ -40,6 +40,10 @@ describe('RegistrationService', () => {
     regService = app.get<RegistrationService>(RegistrationService);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('root', () => {
     it('should send a message', async () => {
       try {

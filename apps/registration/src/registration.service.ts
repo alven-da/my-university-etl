@@ -14,11 +14,11 @@ export class RegistrationService {
 
   private serializeData(entity: Student): Record<string, string | number> {
     return {
-      id: entity.id,
+      studentId: entity.id,
       name: entity.name,
       dob: entity.dob,
       yearEnrolled: entity.yearEnrolled,
-      course: entity.course,
+      courseCode: entity.course,
     };
   }
 
@@ -31,6 +31,14 @@ export class RegistrationService {
       return this.mqClient
         .emit(pattern, this.serializeData(studentRecord))
         .toPromise();
+
+      // return new Promise((resolve, reject) => {
+      //   this.mqClient
+      //     .send(pattern, this.serializeData(studentRecord))
+      //     .subscribe((response) => {
+      //       resolve(response);
+      //     });
+      // });
     } catch (error: any) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

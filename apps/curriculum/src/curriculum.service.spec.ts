@@ -60,6 +60,10 @@ describe('CurriculumService', () => {
     curriculumService = app.get<CurriculumService>(CurriculumService);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('root', () => {
     it('should process the data without exceptions thrown', async () => {
       const saved = await curriculumService.processSubjects({

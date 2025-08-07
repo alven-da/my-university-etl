@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
+
 import { CurriculumModule } from './../src/curriculum.module';
 
 describe('CurriculumController (e2e)', () => {

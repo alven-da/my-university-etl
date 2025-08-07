@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { ClientProxy, EventPattern } from '@nestjs/microservices';
+import { ClientProxy } from '@nestjs/microservices';
 
 import { CurriculumDto } from '@curriculum/dtos/student.dto';
 import { CurriculumRepository } from '@curriculum/repositories/curriculum.repository';
@@ -12,7 +12,6 @@ export class CurriculumService {
     private readonly curriculumRepo: CurriculumRepository,
   ) {}
 
-  @EventPattern('student.register')
   async processSubjects(input: CurriculumDto): Promise<boolean> {
     try {
       const { courseCode, studentId, name } = input;
@@ -38,6 +37,7 @@ export class CurriculumService {
 
       return saved;
     } catch (error) {
+      console.log(error);
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

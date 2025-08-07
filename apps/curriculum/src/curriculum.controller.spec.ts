@@ -27,11 +27,30 @@ describe('CurriculumController', () => {
     service = app.get<CurriculumService>(CurriculumService);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('root', () => {
     it('should return "This is Curriculum Service"', () => {
       expect(controller.healthCheck()).toBe('This is Curriculum Service');
     });
 
-    it('should receive the message from MQ and process using service', async () => {});
+    it('should receive the message from MQ and process using service', async () => {
+      jest.spyOn(service, 'processSubjects').mockResolvedValue(true);
+
+      const data = {
+        pattern: 'student.register',
+        data: {
+          studentId: '093453239',
+          name: 'Juan dela Cruz',
+          courseCode: 'BCS',
+        },
+      };
+
+      const result = await controller.processMessage(data);
+
+      expect(result).toBe(true);
+    });
   });
 });

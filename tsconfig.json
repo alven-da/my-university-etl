@@ -22,8 +22,18 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@curriculum/*": ["apps/curriculum/src/*"],
-      "@registration/*": ["apps/registration/src/*"]
+      "@common/common": [
+        "libs/common/src"
+      ],
+      "@common/common/*": [
+        "libs/common/src/*"
+      ],
+      "@curriculum/*": [
+        "apps/curriculum/src/*"
+      ],
+      "@registration/*": [
+        "apps/registration/src/*"
+      ]
     }
   }
 }
